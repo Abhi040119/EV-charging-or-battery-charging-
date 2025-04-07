@@ -1,0 +1,8 @@
+total_load = base_loads + optimized_charging
+plt.plot(total_load.sum(axis=0), label='Total Grid Load')
+plt.axhline(grid_limit, color='r', linestyle='--', label='Grid Limit')
+plt.title("Grid Load Optimization")
+plt.xlabel("Hour")
+plt.ylabel("kW")
+plt.legend()
+plt.show()
