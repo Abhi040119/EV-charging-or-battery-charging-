@@ -1,0 +1,30 @@
+from scipy.optimize import linprog
+
+# Flatten charging needs to single array for optimization
+c = charging_needs.flatten()  # Minimize total charging (or change to -c for maximizing)
+
+# Constraints: total load at any hour < grid limit
+grid_limit = 50  # kW max
+A = []
+b = []
+
+for h in range(hours):
+    constraint = np.zeros(n_sites * hours)
+    for s in range(n_sites):
+        idx = s * hours + h
+        constraint[idx] = 1
+    A.append(constraint)
+    b.append(grid_limit - base_loads[:, h].sum())
+
+A = np.array(A)
+b = np.array(b)
+
+bounds = [(0, charging_needs[i, j]) for i in range(n_sites) for j in range(hours)]
+
+res = linprog(c=c, A_ub=A, b_ub=b, bounds=bounds, method='highs')
+
+if res.success:
+    optimized_charging = res.x.reshape(n_sites, hours)
+    print("Optimization successful!")
+else:
+    print("Optimization failed.")
