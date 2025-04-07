@@ -1,0 +1,12 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Example: simulate 5 sites, 24 hours
+n_sites = 5
+hours = 24
+np.random.seed(42)
+
+# Random base loads and charging demands
+base_loads = np.random.uniform(5, 10, (n_sites, hours))  # base consumption in kW
+charging_needs = np.random.uniform(0, 5, (n_sites, hours))  # charging demand
