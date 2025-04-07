@@ -1,0 +1,19 @@
++----------------------+
+|  Load Simulation     |
+|  - Base load         |
+|  - Charging demand   |
++----------+-----------+
+           |
+           v
++----------+-----------+
+| Optimization Engine  |
+| - LP to balance load |
+| - Minimize overload  |
++----------+-----------+
+           |
+           v
++----------+-----------+
+|   Visualization      |
+| - Plot grid load     |
+| - Show optimized use |
++----------------------+
